@@ -1,5 +1,0 @@
-compileTheFile:
-	gcc test.c
-
-run: compileTheFile
-	./a.out
