@@ -1,0 +1,2 @@
+final: 
+	g++ sendMessage.c receiveMessage.c -o messagequeuemethod
