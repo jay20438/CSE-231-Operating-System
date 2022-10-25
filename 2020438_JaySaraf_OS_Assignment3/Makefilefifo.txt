@@ -1,2 +1,0 @@
-result:
-	g++ P1UsingFIFO.c P2UsingFIFO.c -o fifoipcmethod
