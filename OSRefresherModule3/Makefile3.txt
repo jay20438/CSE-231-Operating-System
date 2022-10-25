@@ -1,0 +1,2 @@
+target:
+	g++ bubbleSortSelectionSort.c AVLHeightBalancedBinarySearchTree.c BSTInsertionDeletionInCOtherMethod.c -o hello
