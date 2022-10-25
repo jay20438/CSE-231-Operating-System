@@ -1,0 +1,108 @@
+--- sysold.c	2022-01-04 13:38:33.058000000 +0530
++++ sys.c	2022-01-04 13:43:19.253723514 +0530
+@@ -4,7 +4,9 @@
+  *
+  *  Copyright (C) 1991, 1992  Linus Torvalds
+  */
+-
++#include <linux/uaccess.h>
++#include <asm/uaccess.h>
++#include <linux/linkage.h>
+ #include <linux/export.h>
+ #include <linux/mm.h>
+ #include <linux/utsname.h>
+@@ -2731,4 +2733,94 @@
+ 		return -EFAULT;
+ 	return 0;
+ }
++struct queue{
++	arr[15];
++	fr;
++	bc;
++}
++struct queue *q;
++struct mutex lock;
++SYSCALL_DEFINE1(reader,long,val){
++int isFull() {
++  if ((fr == bc + 1) || (fr == 0 && rbc == SIZE - 1)) return 1;
++
++
++  if(!q){
++ptr = kmallock(sizeof(struct q),GFP_KERNEL);
++if(!ptr)
++{
++	perror("");
++
++}
++
++q->fr = -1;
++q->bc = -1;
++
++  }
++  else{
++	  q->fr = (q->bc + 1)%15;
++	  return val;
++  }
++
++
++    printf("\n Queue is full!! \n");
++}
++
++SYSCALL_DEFINE1(writer,long,val){
++int isFull() {
++  if ((fr == bc + 1) || (fr == 0 && rbc == SIZE - 1)) return 1;
++
++
++  if(!q){
++ptr = kmallock(sizeof(struct q),GFP_KERNEL);
++if(!ptr)
++{
++	perror("");
++
++}
++
++q->fr = -1;
++q->bc = -1;
++
++  }
++  else{
++	  q->bc = (q->fr + 1)%15;
++	  return 0;
++  }
++
++
++    printf("\n Queue is full!! \n");
++  else {
++    if (fr == -1) fr = 0;
++    bc = (bc + 1) % 15;
++    arr[bc] = val;
++    printf("\n Inserted %d", val);
++  }
++}
++
++}
++SYSCALL_DEFINE1(kernel_2d_memcpy, float*, ptrmatrix)
++{
++	int[2][2] ptrmatrix;
++	int[2][2]ptr2matrix;
++	float *ptr1;
++	ptr1 = malloc(9*sizeof(float));
++	long val = copy_from_user(ptr1,ptrmatrix,sizeof(ptrmatrix));
++	long store = copy_to_user(ptr1,ptrmatrix,sizeof(ptr2matrix));
++	if(val !=0)
++	{
++		return -EFAULT;
++	}
++	int i,j;
++	for(i=0;i<2;i++)
++	{
++		for(j = 0;j<2;j++)
++		{
++			(*ptr1)[i][j] = ptrmatrix[i][j];
++		}
++	}
++
++	printf("%f",(*ptr1)[i][j]);
++	return 0;
++}
+ #endif /* CONFIG_COMPAT */

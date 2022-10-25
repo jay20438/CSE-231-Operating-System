@@ -1,0 +1,13 @@
+--- systable.tbl	2022-01-04 13:42:42.403722109 +0530
++++ syscall_64old.tbl	2022-01-04 13:38:41.414000000 +0530
+@@ -369,9 +369,7 @@
+ 445	common	landlock_add_rule	sys_landlock_add_rule
+ 446	common	landlock_restrict_self	sys_landlock_restrict_self
+ 447	common	memfd_secret		sys_memfd_secret
+-448 common  kernel_2d_memcpy    sys_kernel_2d_memcpy
+-449 common  writer              sys_writer
+-450 common  reader              sys_reader
++
+ #
+ # Due to a historical design error, certain syscalls are numbered differently
+ # in x32 as compared to native x86_64.  These syscalls have numbers 512-547.
