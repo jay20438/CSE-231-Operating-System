@@ -1,0 +1,2 @@
+final:
+	g++ bubbleSortSelectionSort.c dynamicMatrix.c ImplementationOfQueueUsingLinkedList.c ImplementationOfStackUsingLinkedList.c refresherassignment2q3.c studentRecord.c studentRecordUsingDoublyLinkedList.c -o hello2
