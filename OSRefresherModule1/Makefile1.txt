@@ -1,0 +1,2 @@
+all:
+	g++ swappingInC.c reverseStringInC.c binarySearchAndOverflow.c ReadAndWriteInC.c storeBit.c -o hello1
